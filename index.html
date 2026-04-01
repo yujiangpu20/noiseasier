@@ -221,7 +221,7 @@
           <div class="column has-text-centered">
             <h1 class="title is-1 publication-title">
               <!-- <img src="logo.png" alt="Noiseasier Logo" style="height: 2em; vertical-align: middle; margin-right: 0.15em;"> -->
-              Direct Noise Optimization for Text-to-Video Generation
+              Test-Time Noise Optimization for Text-to-Video Generation
             </h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
@@ -484,7 +484,7 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-two-thirds ">
           <div class="content has-text-justified">
-            Diffusion models have significantly advanced text-to-video (T2V) generation, yet they still struggle with fine-grained compositional alignment, including accurate attribute binding, spatial relationships, and object interactions. While reward-based fine-tuning offers a potential remedy, it is susceptible to reward hacking and may fail to generalize to unseen prompt distributions.  In this work, we propose NoisEasier, a test-time training framework that improves T2V generation by directly refining latent noise with differentiable rewards. Built upon fast video consistency models, our method enables efficient gradient-based noise optimization within 4 denoising steps. To mitigate reward hacking, we integrate multiple reward objectives that balance semantic alignment and temporal coherence, and propose a negative-aware reward calibration strategy that strengthens compositional feedback beyond pairwise preference models. Experiments on VBench and T2V-CompBench demonstrate that NoisEasier substantially improves compositional alignment over strong open-source baselines and even surpasses commercial models like Pika and Kling. These results show that noise optimization provides a practical, flexible, and effective alternative to full model fine-tuning for aligned T2V generation.
+            Diffusion models have recently advanced text-to-video (T2V) generation, yet they still struggle with fine-grained compositional alignment, such as attribute binding, spatial relations, and object interactions. While reward-based model fine-tuning offers a potential remedy, it is susceptible to reward hacking and may generalize poorly to unseen prompt distributions. In this work, we propose NoisEasier, a practical test-time scaling framework that improves T2V generation by directly refining the latent noise using differentiable reward feedback. To enable full gradient backpropagation in video diffusion, we leverage video consistency models that compress sampling to 4–8 denoising steps, enabling end-to-end noise refinement within realistic inference budgets. To mitigate reward hacking, we adopt a multi-reward formulation that balances semantic alignment and temporal coherence, and introduce negative-aware reward calibration to strengthen compositional feedback beyond pairwise preference models. Experiments on VBench and T2V-CompBench demonstrate that NoisEasier substantially improves compositional alignment over baseline models with modest additional inference cost. Overall, NoisEasier provides a flexible alternative to reward-based fine-tuning and a complementary add-on when fine-tuned models are available.
           </div>
         </div>
         </div>
