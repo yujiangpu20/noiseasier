@@ -218,7 +218,7 @@ video {
 
 .highlight-card {
   position: relative;
-  aspect-ratio: 14 / 9;
+  aspect-ratio: 8 / 5;
   width: 100%;
   padding: 0;
   overflow: hidden;
@@ -239,7 +239,7 @@ video {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: opacity 220ms ease;
 }
 
@@ -352,9 +352,9 @@ video {
 .video-panel video {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: var(--video-aspect-ratio);
   background: #dce5df;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .panel-label {

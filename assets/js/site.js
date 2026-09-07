@@ -132,6 +132,7 @@
     var index = 0;
 
     card.className = 'comparison-card';
+    card.style.setProperty('--video-aspect-ratio', group.aspectRatio);
     header.className = 'comparison-header';
     title.textContent = group.model;
     header.appendChild(title);
