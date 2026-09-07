@@ -162,13 +162,6 @@
     title.textContent = group.model;
     header.appendChild(title);
 
-    if (group.isNew) {
-      var badge = document.createElement('span');
-      badge.className = 'new-badge';
-      badge.textContent = 'New baseline';
-      header.appendChild(badge);
-    }
-
     sampleGrid.className = 'comparison-samples';
     sampleGrid.classList.toggle('is-two-up', itemsPerPage > 1);
     sampleSlots.forEach(function (slot) {

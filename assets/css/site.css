@@ -304,7 +304,7 @@ video {
 .comparison-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 16px;
   margin-bottom: 22px;
 }
@@ -313,17 +313,7 @@ video {
   margin: 0;
   font-size: clamp(1.35rem, 2.5vw, 1.85rem);
   letter-spacing: -0.025em;
-}
-
-.new-badge {
-  padding: 5px 10px;
-  border-radius: 999px;
-  background: var(--surface-strong);
-  color: var(--accent);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  text-align: center;
 }
 
 .comparison-samples {
@@ -377,7 +367,7 @@ video {
 .panel-label {
   position: absolute;
   top: 10px;
-  left: 50%;
+  left: 10px;
   z-index: 2;
   padding: 5px 11px;
   border-radius: 999px;
@@ -385,7 +375,6 @@ video {
   color: #fff;
   font-size: 0.74rem;
   font-weight: 750;
-  transform: translateX(-50%);
 }
 
 .panel-label.after {
@@ -517,10 +506,6 @@ video {
 
   .comparison-card {
     border-radius: 18px;
-  }
-
-  .comparison-header {
-    align-items: flex-start;
   }
 
   .comparison-media {

@@ -52,7 +52,6 @@ const NOISEASIER_DATA = {
       model: 'AnimateLCM',
       aspectRatio: '1 / 1',
       itemsPerPage: 2,
-      isNew: true,
       samples: [
         ['A blue car drives past a white picket fence on a sunny day.', 'videos/animatelcm/CompBench/consist_attr_0001_before.mp4', 'videos/animatelcm/CompBench/consist_attr_0001_after.mp4'],
         ['Velvet ribbon tied on an iron fence.', 'videos/animatelcm/CompBench/consist_attr_0044_before.mp4', 'videos/animatelcm/CompBench/consist_attr_0044_after.mp4'],
@@ -96,7 +95,6 @@ const NOISEASIER_DATA = {
       model: 'AnimateLCM',
       aspectRatio: '1 / 1',
       itemsPerPage: 2,
-      isNew: true,
       samples: [
         ['Vampire makeup on the face of a beautiful girl with red contact lenses.', 'videos/animatelcm/VBench/vampire_before.mp4', 'videos/animatelcm/VBench/vampire_after.mp4'],
         ['Origami dancers in white paper, 3D render, on a white background, studio shot, dancing modern dance.', 'videos/animatelcm/VBench/paper_before.mp4', 'videos/animatelcm/VBench/paper_after.mp4'],
