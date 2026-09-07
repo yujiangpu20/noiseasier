@@ -36,6 +36,7 @@ const NOISEASIER_DATA = {
       benchmark: 'compbench',
       model: 'T2V-Turbo (MS)',
       aspectRatio: '1 / 1',
+      itemsPerPage: 2,
       samples: [
         ['Purple balloon floating near a yellow car.', 'videos/MS/CompBench/consist_attr_098_before.mp4', 'videos/MS/CompBench/consist_attr_098_after.mp4'],
         ['A timelapse of a flower bud blooming into a full flower.', 'videos/MS/CompBench/dynamic_atrr_0004_before.mp4', 'videos/MS/CompBench/dynamic_atrr_0004_after.mp4'],
@@ -50,6 +51,7 @@ const NOISEASIER_DATA = {
       benchmark: 'compbench',
       model: 'AnimateLCM',
       aspectRatio: '1 / 1',
+      itemsPerPage: 2,
       isNew: true,
       samples: [
         ['A blue car drives past a white picket fence on a sunny day.', 'videos/animatelcm/CompBench/consist_attr_0001_before.mp4', 'videos/animatelcm/CompBench/consist_attr_0001_after.mp4'],
@@ -79,6 +81,7 @@ const NOISEASIER_DATA = {
       benchmark: 'vbench',
       model: 'T2V-Turbo (MS)',
       aspectRatio: '1 / 1',
+      itemsPerPage: 2,
       samples: [
         ['A panda standing on a surfboard in the ocean at sunset.', 'videos/MS/VBench/panda_before.mp4', 'videos/MS/VBench/panda_after.mp4'],
         ['A yellow cat.', 'videos/MS/VBench/cat_before.mp4', 'videos/MS/VBench/cat_after.mp4'],
@@ -92,6 +95,7 @@ const NOISEASIER_DATA = {
       benchmark: 'vbench',
       model: 'AnimateLCM',
       aspectRatio: '1 / 1',
+      itemsPerPage: 2,
       isNew: true,
       samples: [
         ['Vampire makeup on the face of a beautiful girl with red contact lenses.', 'videos/animatelcm/VBench/vampire_before.mp4', 'videos/animatelcm/VBench/vampire_after.mp4'],

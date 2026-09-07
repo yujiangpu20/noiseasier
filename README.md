@@ -36,4 +36,6 @@ Prompts and video paths are centralized in `assets/data/examples.js`. Each compa
 ['Prompt text', 'path/to/baseline.mp4', 'path/to/noiseasier.mp4']
 ```
 
+Set `itemsPerPage: 2` on a model group when its carousel should show two comparison samples per page.
+
 Videos are assigned a source only when their card approaches the viewport. Keep new media inside the matching `videos/` subdirectory and avoid adding unrelated experiment or ablation outputs to the public demo.

@@ -117,21 +117,46 @@
     return { panel: panel, video: video };
   }
 
-  function renderComparison(group) {
-    var card = document.createElement('article');
-    var header = document.createElement('header');
-    var title = document.createElement('h3');
+  function createSamplePair() {
+    var samplePair = document.createElement('section');
     var media = document.createElement('div');
     var baseline = createPanel('Baseline', 'before');
     var result = createPanel('NoisEasier', 'after');
     var prompt = document.createElement('p');
+
+    samplePair.className = 'sample-pair';
+    media.className = 'comparison-media';
+    media.append(baseline.panel, result.panel);
+    prompt.className = 'prompt';
+    prompt.setAttribute('aria-live', 'polite');
+    samplePair.append(media, prompt);
+
+    return {
+      element: samplePair,
+      baseline: baseline,
+      result: result,
+      prompt: prompt
+    };
+  }
+
+  function renderComparison(group) {
+    var card = document.createElement('article');
+    var header = document.createElement('header');
+    var title = document.createElement('h3');
+    var sampleGrid = document.createElement('div');
     var controls = document.createElement('div');
     var previous = document.createElement('button');
     var next = document.createElement('button');
     var dots = document.createElement('div');
-    var index = 0;
+    var pageIndex = 0;
+    var itemsPerPage = group.itemsPerPage || 1;
+    var pageCount = Math.ceil(group.samples.length / itemsPerPage);
+    var sampleSlots = Array.from({ length: itemsPerPage }, function () {
+      return createSamplePair();
+    });
 
     card.className = 'comparison-card';
+    card.classList.toggle('is-multi-sample', itemsPerPage > 1);
     card.style.setProperty('--video-aspect-ratio', group.aspectRatio);
     header.className = 'comparison-header';
     title.textContent = group.model;
@@ -144,28 +169,29 @@
       header.appendChild(badge);
     }
 
-    media.className = 'comparison-media';
-    media.append(baseline.panel, result.panel);
-    prompt.className = 'prompt';
-    prompt.setAttribute('aria-live', 'polite');
+    sampleGrid.className = 'comparison-samples';
+    sampleGrid.classList.toggle('is-two-up', itemsPerPage > 1);
+    sampleSlots.forEach(function (slot) {
+      sampleGrid.appendChild(slot.element);
+    });
     controls.className = 'carousel-controls';
     dots.className = 'dots';
 
     previous.type = 'button';
     previous.className = 'carousel-button';
-    previous.setAttribute('aria-label', 'Previous example');
+    previous.setAttribute('aria-label', 'Previous examples');
     previous.textContent = '‹';
 
     next.type = 'button';
     next.className = 'carousel-button';
-    next.setAttribute('aria-label', 'Next example');
+    next.setAttribute('aria-label', 'Next examples');
     next.textContent = '›';
 
-    var dotButtons = group.samples.map(function (_, dotIndex) {
+    var dotButtons = Array.from({ length: pageCount }, function (_, dotIndex) {
       var dot = document.createElement('button');
       dot.type = 'button';
       dot.className = 'dot-button';
-      dot.setAttribute('aria-label', 'Show example ' + (dotIndex + 1));
+      dot.setAttribute('aria-label', 'Show page ' + (dotIndex + 1));
       dot.addEventListener('click', function () {
         show(dotIndex);
       });
@@ -174,40 +200,61 @@
     });
 
     controls.append(previous, dots, next);
-    card.append(header, media, prompt, controls);
+    card.append(header, sampleGrid, controls);
 
     function loadCurrentVideos() {
-      if (card.dataset.inView === 'true') {
-        playVideo(baseline.video);
-        playVideo(result.video);
+      if (card.dataset.inView !== 'true') {
+        return;
       }
+
+      sampleSlots.forEach(function (slot) {
+        if (!slot.element.hidden) {
+          playVideo(slot.baseline.video);
+          playVideo(slot.result.video);
+        }
+      });
     }
 
-    function show(nextIndex) {
-      index = (nextIndex + group.samples.length) % group.samples.length;
-      var sample = group.samples[index];
+    function show(nextPageIndex) {
+      var visibleSamples = 0;
+      pageIndex = (nextPageIndex + pageCount) % pageCount;
 
-      replaceVideoSource(baseline.video, sample[1]);
-      replaceVideoSource(result.video, sample[2]);
-      prompt.textContent = '“' + sample[0] + '”';
+      sampleSlots.forEach(function (slot, slotIndex) {
+        var sample = group.samples[pageIndex * itemsPerPage + slotIndex];
+
+        slot.element.hidden = !sample;
+        if (!sample) {
+          replaceVideoSource(slot.baseline.video, '');
+          replaceVideoSource(slot.result.video, '');
+          slot.prompt.textContent = '';
+          return;
+        }
+
+        visibleSamples += 1;
+        replaceVideoSource(slot.baseline.video, sample[1]);
+        replaceVideoSource(slot.result.video, sample[2]);
+        slot.prompt.textContent = '“' + sample[0] + '”';
+      });
+
+      sampleGrid.classList.toggle('has-single-sample', visibleSamples === 1 && itemsPerPage > 1);
       dotButtons.forEach(function (dot, dotIndex) {
-        dot.setAttribute('aria-current', String(dotIndex === index));
+        dot.setAttribute('aria-current', String(dotIndex === pageIndex));
       });
       loadCurrentVideos();
     }
 
     previous.addEventListener('click', function () {
-      show(index - 1);
+      show(pageIndex - 1);
     });
     next.addEventListener('click', function () {
-      show(index + 1);
+      show(pageIndex + 1);
     });
 
     card.addEventListener('keydown', function (event) {
       if (event.key === 'ArrowLeft') {
-        show(index - 1);
+        show(pageIndex - 1);
       } else if (event.key === 'ArrowRight') {
-        show(index + 1);
+        show(pageIndex + 1);
       }
     });
 

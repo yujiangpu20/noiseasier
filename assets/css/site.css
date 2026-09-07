@@ -335,10 +335,36 @@ video {
   text-transform: uppercase;
 }
 
+.comparison-samples {
+  display: grid;
+  gap: 28px;
+}
+
+.comparison-samples.is-two-up {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.comparison-samples.is-two-up.has-single-sample {
+  grid-template-columns: minmax(0, calc(50% - 14px));
+  justify-content: center;
+}
+
+.sample-pair {
+  min-width: 0;
+}
+
+.sample-pair[hidden] {
+  display: none;
+}
+
 .comparison-media {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+}
+
+.comparison-card.is-multi-sample .comparison-media {
+  gap: 10px;
 }
 
 .video-panel {
@@ -383,11 +409,17 @@ video {
   text-align: center;
 }
 
+.comparison-card.is-multi-sample .prompt {
+  margin: 14px auto 8px;
+  font-size: clamp(0.9rem, 1.35vw, 1.04rem);
+}
+
 .carousel-controls {
   display: grid;
   grid-template-columns: 42px 1fr 42px;
   align-items: center;
   gap: 14px;
+  margin-top: 8px;
 }
 
 .carousel-button,
@@ -502,6 +534,16 @@ video {
   .comparison-media {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .comparison-samples.is-two-up,
+  .comparison-samples.is-two-up.has-single-sample {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-card.is-multi-sample .comparison-media {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
 
   .abstract-copy {
