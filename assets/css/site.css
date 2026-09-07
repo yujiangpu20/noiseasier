@@ -174,16 +174,6 @@ video {
   text-decoration: none;
 }
 
-.project-link small {
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 600;
-}
-
-.project-link.is-disabled {
-  opacity: 0.68;
-}
-
 .section {
   padding: clamp(72px, 9vw, 112px) 24px;
 }
